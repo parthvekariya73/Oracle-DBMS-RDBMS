@@ -1,0 +1,131 @@
+SQL> select COUNT(*) from emp;
+
+  COUNT(*)                                                                                          
+----------                                                                                          
+        14                                                                                          
+
+SQL> select MIN(10) from emp;
+
+   MIN(10)                                                                                          
+----------                                                                                          
+        10                                                                                          
+
+SQL> select MIN(10,20) from emp;
+select MIN(10,20) from emp
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> select MIN(deptno) from emp;
+
+MIN(DEPTNO)                                                                                         
+-----------                                                                                         
+         10                                                                                         
+
+SQL> select MIN(sal) from emp;
+
+  MIN(SAL)                                                                                          
+----------                                                                                          
+       800                                                                                          
+
+SQL> select MIN(comm) from emp;
+
+ MIN(COMM)                                                                                          
+----------                                                                                          
+         0                                                                                          
+
+SQL> select MIN(ename) from emp;
+
+MIN(ENAME)                                                                                          
+----------                                                                                          
+ADAMS                                                                                               
+
+SQL> select MIN(empno) from emp;
+
+MIN(EMPNO)                                                                                          
+----------                                                                                          
+      7369                                                                                          
+
+SQL> select MAX(empno) from emp;
+
+MAX(EMPNO)                                                                                          
+----------                                                                                          
+      7934                                                                                          
+
+SQL> select MAX(deptno) from emp;
+
+MAX(DEPTNO)                                                                                         
+-----------                                                                                         
+         30                                                                                         
+
+SQL> select MAX(sal) from emp;
+
+  MAX(SAL)                                                                                          
+----------                                                                                          
+      5000                                                                                          
+
+SQL> select MAX(comm) from emp;
+
+ MAX(COMM)                                                                                          
+----------                                                                                          
+      1400                                                                                          
+
+SQL> select SUM(sal, comm) from emp;
+select SUM(sal, comm) from emp
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> select SUM(comm) from emp;
+
+ SUM(COMM)                                                                                          
+----------                                                                                          
+      2200                                                                                          
+
+SQL> select SUM(sal) from emp;
+
+  SUM(SAL)                                                                                          
+----------                                                                                          
+     29025                                                                                          
+
+SQL> select SUM(deptono) from emp;
+select SUM(deptono) from emp
+           *
+ERROR at line 1:
+ORA-00904: "DEPTONO": invalid identifier 
+
+
+SQL> select SUM(deptno) from emp;
+
+SUM(DEPTNO)                                                                                         
+-----------                                                                                         
+        310                                                                                         
+
+SQL> select SUM(10,20) from dual;
+select SUM(10,20) from dual
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> select AVG(deptno) from emp;
+
+AVG(DEPTNO)                                                                                         
+-----------                                                                                         
+ 22.1428571                                                                                         
+
+SQL> select AVG(sal) from emp;
+
+  AVG(SAL)                                                                                          
+----------                                                                                          
+2073.21429                                                                                          
+
+SQL> select AVG(comm) from emp;
+
+ AVG(COMM)                                                                                          
+----------                                                                                          
+       550                                                                                          
+
+SQL> spool off;

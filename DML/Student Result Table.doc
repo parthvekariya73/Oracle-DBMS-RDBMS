@@ -1,0 +1,39 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> create table result (
+  2  rid number(4),
+  3  snm varchar2(10),
+  4  clsnm varchar2(6),
+  5  oracle number(3),
+  6  cpp number(3),
+  7  wp number(3),
+  8  net number(3),
+  9  tot number(3),
+ 10  per number(5, 2)
+ 11  );
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+6 rows selected.
+
+SQL> select * from result;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

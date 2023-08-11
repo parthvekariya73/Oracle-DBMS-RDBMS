@@ -1,0 +1,184 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+6 rows selected.
+
+SQL> desc emp;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ EMPNO                                                 NOT NULL NUMBER(4)
+ ENAME                                                          VARCHAR2(10)
+ JOB                                                            VARCHAR2(9)
+ MGR                                                            NUMBER(4)
+ HIREDATE                                                       DATE
+ SAL                                                            NUMBER(7,2)
+ COMM                                                           NUMBER(7,2)
+ DEPTNO                                                         NUMBER(2)
+
+SQL> create table empinfo as select * from emp;
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+EMPINFO                        TABLE                                                                
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+7 rows selected.
+
+SQL> desc empinfo;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ EMPNO                                                 NOT NULL NUMBER(4)
+ ENAME                                                          VARCHAR2(10)
+ JOB                                                            VARCHAR2(9)
+ MGR                                                            NUMBER(4)
+ HIREDATE                                                       DATE
+ SAL                                                            NUMBER(7,2)
+ COMM                                                           NUMBER(7,2)
+ DEPTNO                                                         NUMBER(2)
+
+SQL> select * from empinfo;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> create table employee as select ename enm, job post, sal msal from emp;
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+EMPINFO                        TABLE                                                                
+RESULT                         TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+8 rows selected.
+
+SQL> desc employee;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ ENM                                                            VARCHAR2(10)
+ POST                                                           VARCHAR2(9)
+ MSAL                                                           NUMBER(7,2)
+
+SQL> select * from employee;
+
+ENM        POST            MSAL                                                                     
+---------- --------- ----------                                                                     
+SMITH      CLERK            800                                                                     
+ALLEN      SALESMAN        1600                                                                     
+WARD       SALESMAN        1250                                                                     
+JONES      MANAGER         2975                                                                     
+MARTIN     SALESMAN        1250                                                                     
+BLAKE      MANAGER         2850                                                                     
+CLARK      MANAGER         2450                                                                     
+SCOTT      ANALYST         3000                                                                     
+KING       PRESIDENT       5000                                                                     
+TURNER     SALESMAN        1500                                                                     
+ADAMS      CLERK           1100                                                                     
+
+ENM        POST            MSAL                                                                     
+---------- --------- ----------                                                                     
+JAMES      CLERK            950                                                                     
+FORD       ANALYST         3000                                                                     
+MILLER     CLERK           1300                                                                     
+
+14 rows selected.
+
+SQL> create table emp_info as select ename name, job jobpost, sal pagar from emp where deptno=20;
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+EMPINFO                        TABLE                                                                
+RESULT                         TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+EMP_INFO                       TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+9 rows selected.
+
+SQL> desc emp_info;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NAME                                                           VARCHAR2(10)
+ JOBPOST                                                        VARCHAR2(9)
+ PAGAR                                                          NUMBER(7,2)
+
+SQL> select * from emp_info;
+
+NAME       JOBPOST        PAGAR                                                                     
+---------- --------- ----------                                                                     
+SMITH      CLERK            800                                                                     
+JONES      MANAGER         2975                                                                     
+SCOTT      ANALYST         3000                                                                     
+ADAMS      CLERK           1100                                                                     
+FORD       ANALYST         3000                                                                     
+
+SQL> select ename, job , sal from emp where deptno=20;
+
+ENAME      JOB              SAL                                                                     
+---------- --------- ----------                                                                     
+SMITH      CLERK            800                                                                     
+JONES      MANAGER         2975                                                                     
+SCOTT      ANALYST         3000                                                                     
+ADAMS      CLERK           1100                                                                     
+FORD       ANALYST         3000                                                                     
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

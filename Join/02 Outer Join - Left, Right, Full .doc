@@ -1,0 +1,273 @@
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+        20 RESEARCH       DALLAS                                                                    
+        30 SALES          CHICAGO                                                                   
+        40 OPERATIONS     BOSTON                                                                    
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      SMITH      CLERK            800                                        
+ACCOUNTING     NEW YORK      ALLEN      SALESMAN        1600                                        
+ACCOUNTING     NEW YORK      WARD       SALESMAN        1250                                        
+ACCOUNTING     NEW YORK      JONES      MANAGER         2975                                        
+ACCOUNTING     NEW YORK      MARTIN     SALESMAN        1250                                        
+ACCOUNTING     NEW YORK      BLAKE      MANAGER         2850                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+ACCOUNTING     NEW YORK      SCOTT      ANALYST         3000                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+ACCOUNTING     NEW YORK      TURNER     SALESMAN        1500                                        
+ACCOUNTING     NEW YORK      ADAMS      CLERK           1100                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      JAMES      CLERK            950                                        
+ACCOUNTING     NEW YORK      FORD       ANALYST         3000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+RESEARCH       DALLAS        ALLEN      SALESMAN        1600                                        
+RESEARCH       DALLAS        WARD       SALESMAN        1250                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+RESEARCH       DALLAS        MARTIN     SALESMAN        1250                                        
+RESEARCH       DALLAS        BLAKE      MANAGER         2850                                        
+RESEARCH       DALLAS        CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+RESEARCH       DALLAS        KING       PRESIDENT       5000                                        
+RESEARCH       DALLAS        TURNER     SALESMAN        1500                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+RESEARCH       DALLAS        JAMES      CLERK            950                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+RESEARCH       DALLAS        MILLER     CLERK           1300                                        
+SALES          CHICAGO       SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+SALES          CHICAGO       JONES      MANAGER         2975                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+SALES          CHICAGO       CLARK      MANAGER         2450                                        
+SALES          CHICAGO       SCOTT      ANALYST         3000                                        
+SALES          CHICAGO       KING       PRESIDENT       5000                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+SALES          CHICAGO       ADAMS      CLERK           1100                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+SALES          CHICAGO       FORD       ANALYST         3000                                        
+SALES          CHICAGO       MILLER     CLERK           1300                                        
+OPERATIONS     BOSTON        SMITH      CLERK            800                                        
+OPERATIONS     BOSTON        ALLEN      SALESMAN        1600                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+OPERATIONS     BOSTON        WARD       SALESMAN        1250                                        
+OPERATIONS     BOSTON        JONES      MANAGER         2975                                        
+OPERATIONS     BOSTON        MARTIN     SALESMAN        1250                                        
+OPERATIONS     BOSTON        BLAKE      MANAGER         2850                                        
+OPERATIONS     BOSTON        CLARK      MANAGER         2450                                        
+OPERATIONS     BOSTON        SCOTT      ANALYST         3000                                        
+OPERATIONS     BOSTON        KING       PRESIDENT       5000                                        
+OPERATIONS     BOSTON        TURNER     SALESMAN        1500                                        
+OPERATIONS     BOSTON        ADAMS      CLERK           1100                                        
+OPERATIONS     BOSTON        JAMES      CLERK            950                                        
+OPERATIONS     BOSTON        FORD       ANALYST         3000                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+OPERATIONS     BOSTON        MILLER     CLERK           1300                                        
+
+56 rows selected.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno = e.deptno;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+
+14 rows selected.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno = e.deptno(+);
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+OPERATIONS     BOSTON                                                                               
+
+15 rows selected.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where e.deptno = d.deptno(+);
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+
+14 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno(+) = e.deptno;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+
+14 rows selected.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where e.deptno(+) = d.deptno;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+OPERATIONS     BOSTON                                                                               
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno = e.deptno(+)
+  2  UNION
+  3  select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno(+) = e.deptno;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+OPERATIONS     BOSTON                                                                               
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

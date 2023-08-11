@@ -1,0 +1,41 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+7 rows selected.
+
+SQL> truncate table staff;
+
+Table truncated.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+7 rows selected.
+
+SQL> select * from staff;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

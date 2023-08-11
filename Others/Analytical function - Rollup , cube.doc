@@ -1,0 +1,129 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select deptno, job, sum(sal) as Salary from emp;
+select deptno, job, sum(sal) as Salary from emp
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select deptno, job, sum(sal) as Salary from emp group by deptno;
+select deptno, job, sum(sal) as Salary from emp group by deptno
+               *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select deptno, job, sum(sal) as Salary from emp group by deptno, job;
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+        20 CLERK           1900                                                                     
+        30 SALESMAN        5600                                                                     
+        20 MANAGER         2975                                                                     
+        30 CLERK            950                                                                     
+        10 PRESIDENT       5000                                                                     
+        30 MANAGER         2850                                                                     
+        10 CLERK           1300                                                                     
+        10 MANAGER         2450                                                                     
+        20 ANALYST         6000                                                                     
+
+9 rows selected.
+
+SQL> select deptno, job, sum(sal) as Salary from emp group by deptno, job order by deptno, job;
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+        10 CLERK           1300                                                                     
+        10 MANAGER         2450                                                                     
+        10 PRESIDENT       5000                                                                     
+        20 ANALYST         6000                                                                     
+        20 CLERK           1900                                                                     
+        20 MANAGER         2975                                                                     
+        30 CLERK            950                                                                     
+        30 MANAGER         2850                                                                     
+        30 SALESMAN        5600                                                                     
+
+9 rows selected.
+
+SQL> select deptno, job, sum(sal) as Salary from emp group by rollup(deptno, job);
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+        10 CLERK           1300                                                                     
+        10 MANAGER         2450                                                                     
+        10 PRESIDENT       5000                                                                     
+        10                 8750                                                                     
+        20 CLERK           1900                                                                     
+        20 ANALYST         6000                                                                     
+        20 MANAGER         2975                                                                     
+        20                10875                                                                     
+        30 CLERK            950                                                                     
+        30 MANAGER         2850                                                                     
+        30 SALESMAN        5600                                                                     
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+        30                 9400                                                                     
+                          29025                                                                     
+
+13 rows selected.
+
+SQL> select deptno, job, sum(sal) as Salary from emp group by cube(deptno, job);
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+                          29025                                                                     
+           CLERK           4150                                                                     
+           ANALYST         6000                                                                     
+           MANAGER         8275                                                                     
+           SALESMAN        5600                                                                     
+           PRESIDENT       5000                                                                     
+        10                 8750                                                                     
+        10 CLERK           1300                                                                     
+        10 MANAGER         2450                                                                     
+        10 PRESIDENT       5000                                                                     
+        20                10875                                                                     
+
+    DEPTNO JOB           SALARY                                                                     
+---------- --------- ----------                                                                     
+        20 CLERK           1900                                                                     
+        20 ANALYST         6000                                                                     
+        20 MANAGER         2975                                                                     
+        30                 9400                                                                     
+        30 CLERK            950                                                                     
+        30 MANAGER         2850                                                                     
+        30 SALESMAN        5600                                                                     
+
+18 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

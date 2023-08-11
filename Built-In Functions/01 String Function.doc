@@ -1,0 +1,167 @@
+SQL> select * from emp;\
+  2  
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select LOWER('ORACLE DATABASE') "lowercase" from dual;
+
+lowercase                                                                                           
+---------------                                                                                     
+oracle database                                                                                     
+
+SQL> select LOWER('ORACLE DATABASE','PARTH') "lowercase" from dual;
+select LOWER('ORACLE DATABASE','PARTH') "lowercase" from dual
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> select 3+4;
+select 3+4
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select 3+4 from dual;
+
+       3+4                                                                                          
+----------                                                                                          
+         7                                                                                          
+
+SQL> select UPPER('parth') "Uppercase" from dual;
+
+Upper                                                                                               
+-----                                                                                               
+PARTH                                                                                               
+
+SQL> select INITCAP('parth vekariya') "Capital" from dual;
+
+Capital                                                                                             
+--------------                                                                                      
+Parth Vekariya                                                                                      
+
+SQL> select SUBSTR('parthvekariya',3,4) "SubString" from dual;
+
+SubS                                                                                                
+----                                                                                                
+rthv                                                                                                
+
+SQL> select SUBSTR('parthvekariya',0,5) "SubString" from dual;
+
+SubSt                                                                                               
+-----                                                                                               
+parth                                                                                               
+
+SQL> select INSTR('parthvekariya','v') from dual;
+
+INSTR('PARTHVEKARIYA','V')                                                                          
+--------------------------                                                                          
+                         6                                                                          
+
+SQL> select INSTR('parthvekariya','p') from dual;
+
+INSTR('PARTHVEKARIYA','P')                                                                          
+--------------------------                                                                          
+                         1                                                                          
+
+SQL> select INSTR('parthvekariya','a') from dual;
+
+INSTR('PARTHVEKARIYA','A')                                                                          
+--------------------------                                                                          
+                         2                                                                          
+
+SQL> select INSTR('parthvekariya','a',3,2) from dual;
+
+INSTR('PARTHVEKARIYA','A',3,2)                                                                      
+------------------------------                                                                      
+                            13                                                                      
+
+SQL> select LTRIM('PARTH','P') "LTRIM" from dual;
+
+LTRI                                                                                                
+----                                                                                                
+ARTH                                                                                                
+
+SQL> select LTRIM('PARTH',1) "LTRIM" from dual;
+
+LTRIM                                                                                               
+-----                                                                                               
+PARTH                                                                                               
+
+SQL> select LTRIM('PARTH','R') "LTRIM" from dual;
+
+LTRIM                                                                                               
+-----                                                                                               
+PARTH                                                                                               
+
+SQL> select LTRIM('PARTH','H') "LTRIM" from dual;
+
+LTRIM                                                                                               
+-----                                                                                               
+PARTH                                                                                               
+
+SQL> select TRIM(leading 'x' from 'xxxjayxxx') "TRIM LEFT SIDE" from dual;
+
+TRIM L                                                                                              
+------                                                                                              
+jayxxx                                                                                              
+
+SQL> select TRIM(both 'x' from 'xxxjayxxx') "TRIM RIGHT SIDE" from dual;
+
+TRI                                                                                                 
+---                                                                                                 
+jay                                                                                                 
+
+SQL> select TRIM('jay') "TRIM RIGHT SIDE" from dual;
+
+TRI                                                                                                 
+---                                                                                                 
+jay                                                                                                 
+
+SQL> select RTRIM('jay','a') "RTRIM" from dual;
+
+RTR                                                                                                 
+---                                                                                                 
+jay                                                                                                 
+
+SQL> select RTRIM('jay','j') "RTRIM" from dual;
+
+RTR                                                                                                 
+---                                                                                                 
+jay                                                                                                 
+
+SQL> select RTRIM('jay','y') "RTRIM" from dual;
+
+RT                                                                                                  
+--                                                                                                  
+ja                                                                                                  
+
+SQL> select CHR(67) || CHR(65) || CHR(84) from dual;
+
+CHR                                                                                                 
+---                                                                                                 
+CAT                                                                                                 
+
+SQL> spool off;

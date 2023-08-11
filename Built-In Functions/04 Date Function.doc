@@ -1,0 +1,93 @@
+SQL> select ADD-MONTHS('10-MAY-23',3) from dual;
+select ADD-MONTHS('10-MAY-23',3) from dual
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select ADD_MONTHS('10-MAY-23',3) from dual;
+
+ADD_MONTH                                                                                           
+---------                                                                                           
+10-AUG-23                                                                                           
+
+SQL> select ADD_MONTHS('05-SEP-23',3) from dual;
+
+ADD_MONTH                                                                                           
+---------                                                                                           
+05-DEC-23                                                                                           
+
+SQL> select LAST_DAY('05-FEB-23') from dual;
+
+LAST_DAY(                                                                                           
+---------                                                                                           
+28-FEB-23                                                                                           
+
+SQL> select LAST_DAY('05-FEB-04') from dual;
+
+LAST_DAY(                                                                                           
+---------                                                                                           
+29-FEB-04                                                                                           
+
+SQL> select LAST_DAY('05-MAY-04') from dual;
+
+LAST_DAY(                                                                                           
+---------                                                                                           
+31-MAY-04                                                                                           
+
+SQL> select NEXT_DAY('14-OCT-03', 'SUNDAY') from dual;
+
+NEXT_DAY(                                                                                           
+---------                                                                                           
+19-OCT-03                                                                                           
+
+SQL> select NEXT_DAY('11-JUL-23', 'SUNDAY') from dual;
+
+NEXT_DAY(                                                                                           
+---------                                                                                           
+16-JUL-23                                                                                           
+
+SQL> select MONTHS_BETWEEN('02-DEC-03', '04-APR-03') from dual;
+
+MONTHS_BETWEEN('02-DEC-03','04-APR-03')                                                             
+---------------------------------------                                                             
+                             7.93548387                                                             
+
+SQL> select MONTHS_BETWEEN('04-DEC-03', '04-APR-03') from dual;
+
+MONTHS_BETWEEN('04-DEC-03','04-APR-03')                                                             
+---------------------------------------                                                             
+                                      8                                                             
+
+SQL> select EXTRACT(YEAR FROM sysdate) from dual;
+
+EXTRACT(YEARFROMSYSDATE)                                                                            
+------------------------                                                                            
+                    2023                                                                            
+
+SQL> select EXTRACT(MONTH FROM sysdate) from dual;
+
+EXTRACT(MONTHFROMSYSDATE)                                                                           
+-------------------------                                                                           
+                        7                                                                           
+
+SQL> select EXTRACT(DATE FROM sysdate) from dual;
+select EXTRACT(DATE FROM sysdate) from dual
+               *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select EXTRACT(DAY FROM sysdate) from dual;
+
+EXTRACT(DAYFROMSYSDATE)                                                                             
+-----------------------                                                                             
+                     11                                                                             
+
+SQL> select systimestamp from dual;
+
+SYSTIMESTAMP                                                                                        
+---------------------------------------------------------------------------                         
+11-JUL-23 04.02.05.459000 PM +05:30                                                                 
+
+SQL> spool off;

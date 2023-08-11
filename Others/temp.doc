@@ -1,0 +1,102 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+STAFF                          TABLE                                            
+RESULT                         TABLE                                            
+STUDDATA                       TABLE                                            
+STUD                           TABLE                                            
+STUDMARKS                      TABLE                                            
+SEMMARK                        TABLE                                            
+EMP                            TABLE                                            
+DEPT                           TABLE                                            
+BONUS                          TABLE                                            
+SALGRADE                       TABLE                                            
+DUMMY                          TABLE                                            
+
+11 rows selected.
+
+SQL> set linesize 100;
+SQL> create table customer
+  2  (
+  3  cid number(3) constraint cusid primary key,
+  4  cnm varchar2(10) NOT NULL,
+  5  codd varchar2(10),
+  6  cct varchar2(10) default 'AMRELI',
+  7  cmob number(10) unique,
+  8  cemailid varchar2(15) unique,
+  9  age number(3)
+ 10  );
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+CUSTOMER                       TABLE                                                                
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUDDATA                       TABLE                                                                
+STUD                           TABLE                                                                
+STUDMARKS                      TABLE                                                                
+SEMMARK                        TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+DUMMY                          TABLE                                                                
+
+12 rows selected.
+
+SQL> select * from customer;
+
+no rows selected
+
+SQL> desc customer;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ CID                                                   NOT NULL NUMBER(3)
+ CNM                                                   NOT NULL VARCHAR2(10)
+ CODD                                                           VARCHAR2(10)
+ CCT                                                            VARCHAR2(10)
+ CMOB                                                           NUMBER(10)
+ CEMAILID                                                       VARCHAR2(15)
+ AGE                                                            NUMBER(3)
+
+SQL> create table product
+  2  (
+  3  pid number(3) constraint proid primary key,
+  4  pcode number(4) check(pcode between 1001 and 1099),
+  5  pnm varchar2(10) unique,
+  6  pmes varchar2(10) check(pmes in('LITER','KG','UNITS')),
+  7  price number(6),
+  8  pmd date,
+  9  pexp date
+ 10  );
+
+Table created.
+
+SQL> select * from product;
+
+no rows selected
+
+SQL> desc product;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ PID                                                   NOT NULL NUMBER(3)
+ PCODE                                                          NUMBER(4)
+ PNM                                                            VARCHAR2(10)
+ PMES                                                           VARCHAR2(10)
+ PRICE                                                          NUMBER(6)
+ PMD                                                            DATE
+ PEXP                                                           DATE
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

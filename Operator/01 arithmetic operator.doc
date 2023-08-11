@@ -1,0 +1,73 @@
+SQL> connect emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select ename, (sal*2) from emp where deptno=20;
+
+ENAME         (SAL*2)                                                                               
+---------- ----------                                                                               
+SMITH            1600                                                                               
+JONES            5950                                                                               
+SCOTT            6000                                                                               
+ADAMS            2200                                                                               
+FORD             6000                                                                               
+
+SQL> select (10+20) from dual;
+
+   (10+20)                                                                                          
+----------                                                                                          
+        30                                                                                          
+
+SQL> select ename, sal+100 from emp where empno=10;
+
+no rows selected
+
+SQL> select ename, sal+100 from emp where deptno=10;
+
+ENAME         SAL+100                                                                               
+---------- ----------                                                                               
+CLARK            2550                                                                               
+KING             5100                                                                               
+MILLER           1400                                                                               
+
+SQL> select ename, sal-100 from emp where deptno=30;
+
+ENAME         SAL-100                                                                               
+---------- ----------                                                                               
+ALLEN            1500                                                                               
+WARD             1150                                                                               
+MARTIN           1150                                                                               
+BLAKE            2750                                                                               
+TURNER           1400                                                                               
+JAMES             850                                                                               
+
+6 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

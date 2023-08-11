@@ -1,0 +1,135 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+EMPINFO                        TABLE                                                                
+RESULT                         TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+EMP_INFO                       TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+9 rows selected.
+
+SQL> drop table empinfo;
+
+Table dropped.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+EMP_INFO                       TABLE                                                                
+BIN$nmDcRvNeT7OmZ5HA85T/6g==$0 TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+9 rows selected.
+
+SQL> drop table emp_info;
+
+Table dropped.
+
+SQL> drop table employee;
+
+Table dropped.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE                                                                
+RESULT                         TABLE                                                                
+BIN$wogAfdJZTn68q/HGCoyVQg==$0 TABLE                                                                
+BIN$nmDcRvNeT7OmZ5HA85T/6g==$0 TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+9 rows selected.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME                              
+---------------- ------------------------------ ------------ -------------------                    
+EMPINFO          BIN$nmDcRvNeT7OmZ5HA85T/6g==$0 TABLE        2023-07-23:14:29:40                    
+EMPLOYEE         BIN$wogAfdJZTn68q/HGCoyVQg==$0 TABLE        2023-07-23:14:31:07                    
+EMP_INFO         BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE        2023-07-23:14:30:57                    
+SQL> flashback table empinfo to before drop;
+
+Flashback complete.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME                              
+---------------- ------------------------------ ------------ -------------------                    
+EMPLOYEE         BIN$wogAfdJZTn68q/HGCoyVQg==$0 TABLE        2023-07-23:14:31:07                    
+EMP_INFO         BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE        2023-07-23:14:30:57                    
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE                                                                
+RESULT                         TABLE                                                                
+EMPINFO                        TABLE                                                                
+BIN$wogAfdJZTn68q/HGCoyVQg==$0 TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+9 rows selected.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME                              
+---------------- ------------------------------ ------------ -------------------                    
+EMPLOYEE         BIN$wogAfdJZTn68q/HGCoyVQg==$0 TABLE        2023-07-23:14:31:07                    
+EMP_INFO         BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE        2023-07-23:14:30:57                    
+SQL> purge tble employee;
+purge tble employee
+      *
+ERROR at line 1:
+ORA-38302: invalid PURGE option 
+
+
+SQL> purge table employee;
+
+Table purged.
+
+SQL> show recyclebin;
+ORIGINAL NAME    RECYCLEBIN NAME                OBJECT TYPE  DROP TIME                              
+---------------- ------------------------------ ------------ -------------------                    
+EMP_INFO         BIN$vnhZaSFjQN+S0ZUqrVt33Q==$0 TABLE        2023-07-23:14:30:57                    
+SQL> purge recyclebin;
+
+Recyclebin purged.
+
+SQL> show recyclebin;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMPINFO                        TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+7 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

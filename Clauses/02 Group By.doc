@@ -1,0 +1,63 @@
+SQL> conn emp/emp;
+Connected.
+SQL> select deptno, max(sal) from emp GROUP BY deptno;
+
+    DEPTNO   MAX(SAL)                                                           
+---------- ----------                                                           
+        30       2850                                                           
+        20       3000                                                           
+        10       5000                                                           
+
+SQL> select deptno, max(job) from emp GROUP BY deptno;
+
+    DEPTNO MAX(JOB)                                                             
+---------- ---------                                                            
+        30 SALESMAN                                                             
+        20 MANAGER                                                              
+        10 PRESIDENT                                                            
+
+SQL> select ename, count(comm) from emp GROUP BY ename;
+
+ENAME      COUNT(COMM)                                                          
+---------- -----------                                                          
+ALLEN                1                                                          
+JONES                0                                                          
+FORD                 0                                                          
+CLARK                0                                                          
+MILLER               0                                                          
+SMITH                0                                                          
+WARD                 1                                                          
+MARTIN               1                                                          
+SCOTT                0                                                          
+TURNER               1                                                          
+ADAMS                0                                                          
+
+ENAME      COUNT(COMM)                                                          
+---------- -----------                                                          
+BLAKE                0                                                          
+KING                 0                                                          
+JAMES                0                                                          
+
+14 rows selected.
+
+SQL> select deptno, job, max(sal) from emp group by deptno, job;
+
+    DEPTNO JOB         MAX(SAL)                                                 
+---------- --------- ----------                                                 
+        20 CLERK           1100                                                 
+        30 SALESMAN        1600                                                 
+        20 MANAGER         2975                                                 
+        30 CLERK            950                                                 
+        10 PRESIDENT       5000                                                 
+        30 MANAGER         2850                                                 
+        10 CLERK           1300                                                 
+        10 MANAGER         2450                                                 
+        20 ANALYST         3000                                                 
+
+9 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

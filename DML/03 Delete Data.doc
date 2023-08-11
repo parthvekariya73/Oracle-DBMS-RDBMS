@@ -1,0 +1,67 @@
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+6 rows selected.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       101 ABC        BCA-3          77         83         63         43        266       66.5      
+       102 XYZ        BCA-3          62         93         76         68        299      74.75      
+       103 PQRS       BCA-3          82         73         73         62        290       72.5      
+       104 MNS        BCA-3          72         57         62         63        254       63.5      
+       105 FGH        BCA-3          62         83         52         92        289      72.25      
+
+SQL> delete result where rid=101;
+
+1 row deleted.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       102 XYZ        BCA-3          62         93         76         68        299      74.75      
+       103 PQRS       BCA-3          82         73         73         62        290       72.5      
+       104 MNS        BCA-3          72         57         62         63        254       63.5      
+       105 FGH        BCA-3          62         83         52         92        289      72.25      
+
+SQL> savepoint s1;
+
+Savepoint created.
+
+SQL> delete result;
+
+4 rows deleted.
+
+SQL> select * from result;
+
+no rows selected
+
+SQL> rollback to s1;
+
+Rollback complete.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       102 XYZ        BCA-3          62         93         76         68        299      74.75      
+       103 PQRS       BCA-3          82         73         73         62        290       72.5      
+       104 MNS        BCA-3          72         57         62         63        254       63.5      
+       105 FGH        BCA-3          62         83         52         92        289      72.25      
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

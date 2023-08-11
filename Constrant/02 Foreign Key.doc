@@ -1,0 +1,218 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUDDATA                       TABLE                                                                
+STUD                           TABLE                                                                
+STUDMARKS                      TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+10 rows selected.
+
+SQL> create table semmark (
+  2  mid number(3) constraint pkmis primary key,
+  3  msid number(3) constraint fksid references studData(sid),
+  4  stot number(3)
+  5  );
+
+Table created.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUDDATA                       TABLE                                                                
+STUD                           TABLE                                                                
+STUDMARKS                      TABLE                                                                
+SEMMARK                        TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+11 rows selected.
+
+SQL> desc semmark;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ MID                                                   NOT NULL NUMBER(3)
+ MSID                                                           NUMBER(3)
+ STOT                                                           NUMBER(3)
+
+SQL> select * from semmark;
+
+no rows selected
+
+SQL> insert into semmark values(&mid, &msid, &stot);
+Enter value for mid: 501
+Enter value for msid: 101
+Enter value for stot: 455
+old   1: insert into semmark values(&mid, &msid, &stot)
+new   1: insert into semmark values(501, 101, 455)
+
+1 row created.
+
+SQL> /
+Enter value for mid: 502
+Enter value for msid: 101
+Enter value for stot: 500
+old   1: insert into semmark values(&mid, &msid, &stot)
+new   1: insert into semmark values(502, 101, 500)
+
+1 row created.
+
+SQL> /
+Enter value for mid: 503
+Enter value for msid: 102
+Enter value for stot: 470
+old   1: insert into semmark values(&mid, &msid, &stot)
+new   1: insert into semmark values(503, 102, 470)
+
+1 row created.
+
+SQL> /
+Enter value for mid: 504
+Enter value for msid: 102
+Enter value for stot: 490
+old   1: insert into semmark values(&mid, &msid, &stot)
+new   1: insert into semmark values(504, 102, 490)
+
+1 row created.
+
+SQL> select * from semmark;
+
+       MID       MSID       STOT                                                                    
+---------- ---------- ----------                                                                    
+       501        101        455                                                                    
+       502        101        500                                                                    
+       503        102        470                                                                    
+       504        102        490                                                                    
+
+SQL> select s.snm, s.cty, m.stot from studData s, semmark m where s.sid = m.msid;
+
+SNM        CTY              STOT                                                                    
+---------- ---------- ----------                                                                    
+ABC        AMRELI            455                                                                    
+ABC        AMRELI            500                                                                    
+XYZ        AMRAPUR           470                                                                    
+XYZ        AMRAPUR           490                                                                    
+
+SQL> select sid from studData where snm='&snm';
+Enter value for snm: ABC
+old   1: select sid from studData where snm='&snm'
+new   1: select sid from studData where snm='ABC'
+
+       SID                                                                                          
+----------                                                                                          
+       101                                                                                          
+
+SQL> /
+Enter value for snm: XYZ
+old   1: select sid from studData where snm='&snm'
+new   1: select sid from studData where snm='XYZ'
+
+       SID                                                                                          
+----------                                                                                          
+       102                                                                                          
+
+SQL> select sid, stot from studData where msid=&msid;
+Enter value for msid: 101
+old   1: select sid, stot from studData where msid=&msid
+new   1: select sid, stot from studData where msid=101
+select sid, stot from studData where msid=101
+                                     *
+ERROR at line 1:
+ORA-00904: "MSID": invalid identifier 
+
+
+SQL> select mid, stot from semmark where msid=&msid;
+Enter value for msid: 101
+old   1: select mid, stot from semmark where msid=&msid
+new   1: select mid, stot from semmark where msid=101
+
+       MID       STOT                                                                               
+---------- ----------                                                                               
+       501        455                                                                               
+       502        500                                                                               
+
+SQL> /
+Enter value for msid: 102
+old   1: select mid, stot from semmark where msid=&msid
+new   1: select mid, stot from semmark where msid=102
+
+       MID       STOT                                                                               
+---------- ----------                                                                               
+       503        470                                                                               
+       504        490                                                                               
+
+SQL> select stot from semmark where msid=(select sid from studData where snm='&snm');
+Enter value for snm: ABC
+old   1: select stot from semmark where msid=(select sid from studData where snm='&snm')
+new   1: select stot from semmark where msid=(select sid from studData where snm='ABC')
+
+      STOT                                                                                          
+----------                                                                                          
+       455                                                                                          
+       500                                                                                          
+
+SQL> /
+Enter value for snm: XYZ
+old   1: select stot from semmark where msid=(select sid from studData where snm='&snm')
+new   1: select stot from semmark where msid=(select sid from studData where snm='XYZ')
+
+      STOT                                                                                          
+----------                                                                                          
+       470                                                                                          
+       490                                                                                          
+
+SQL> select * from studData;
+
+       SID SNM        CTY               MOB                                                         
+---------- ---------- ---------- ----------                                                         
+       101 ABC        AMRELI     1234567891                                                         
+       102 XYZ        AMRAPUR    9876543210                                                         
+
+SQL> select * from semmark;
+
+       MID       MSID       STOT                                                                    
+---------- ---------- ----------                                                                    
+       501        101        455                                                                    
+       502        101        500                                                                    
+       503        102        470                                                                    
+       504        102        490                                                                    
+
+SQL> delete from semmark where msid=102;
+
+2 rows deleted.
+
+SQL> select * from studData;
+
+       SID SNM        CTY               MOB                                                         
+---------- ---------- ---------- ----------                                                         
+       101 ABC        AMRELI     1234567891                                                         
+       102 XYZ        AMRAPUR    9876543210                                                         
+
+SQL> select * from semmark;
+
+       MID       MSID       STOT                                                                    
+---------- ---------- ----------                                                                    
+       501        101        455                                                                    
+       502        101        500                                                                    
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

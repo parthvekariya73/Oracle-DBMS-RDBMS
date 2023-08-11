@@ -1,0 +1,195 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+7 rows selected.
+
+SQL> create table stud
+  2  {
+  3  sid number(3) constraint pksid primary key,
+  4  snm varchar2(10),
+  5  cty varchar2(10),
+  6  clsnm varchar2(5)
+  7  };
+{
+*
+ERROR at line 2:
+ORA-00911: invalid character 
+
+
+SQL> create table stud {
+  2  sid number(3) constraint pksid primary key,
+  3  snm varchar2(10),
+  4  cty varchar2(10),
+  5  clsnm varchar2(5)
+  6  };
+create table stud {
+                  *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> create table stud
+  2  (
+  3  sid number(3) constraint pksid primary key,
+  4  snm varchar2(10),
+  5  cty varchar2(10),
+  6  clsnm varchar2(5)
+  7  );
+
+Table created.
+
+SQL> save "E:\BCA SEM 3\Oracle\Constrins\01 PYtable.sql";
+Created file E:\BCA SEM 3\Oracle\Constrins\01 PYtable.sql
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUD                           TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+8 rows selected.
+
+SQL> desc stud;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ SID                                                   NOT NULL NUMBER(3)
+ SNM                                                            VARCHAR2(10)
+ CTY                                                            VARCHAR2(10)
+ CLSNM                                                          VARCHAR2(5)
+
+SQL> select * from stud;
+
+no rows selected
+
+SQL> insert into stud values(&sid, '&snm', '&cty', '&clsnm');
+Enter value for sid: 101
+Enter value for snm: ABC
+Enter value for cty: AMRELI
+Enter value for clsnm: BCA-3
+old   1: insert into stud values(&sid, '&snm', '&cty', '&clsnm')
+new   1: insert into stud values(101, 'ABC', 'AMRELI', 'BCA-3')
+
+1 row created.
+
+SQL> /
+Enter value for sid: 102
+Enter value for snm: XYZ
+Enter value for cty: AMARAPUR
+Enter value for clsnm: BCA-3
+old   1: insert into stud values(&sid, '&snm', '&cty', '&clsnm')
+new   1: insert into stud values(102, 'XYZ', 'AMARAPUR', 'BCA-3')
+
+1 row created.
+
+SQL> select * from stud;
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       102 XYZ        AMARAPUR   BCA-3                                                              
+
+SQL> /
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       102 XYZ        AMARAPUR   BCA-3                                                              
+
+SQL> insert into stud values(&sid, '&snm', '&cty', '&clsnm');
+Enter value for sid: 103
+Enter value for snm: AAA
+Enter value for cty: AMRELI
+Enter value for clsnm: BCA-1
+old   1: insert into stud values(&sid, '&snm', '&cty', '&clsnm')
+new   1: insert into stud values(103, 'AAA', 'AMRELI', 'BCA-1')
+
+1 row created.
+
+SQL> select * from stud;
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       102 XYZ        AMARAPUR   BCA-3                                                              
+       103 AAA        AMRELI     BCA-1                                                              
+
+SQL> insert into stud values(&sid, '&snm', '&cty', '&clsnm');
+Enter value for sid: 101
+Enter value for snm: BBB
+Enter value for cty: AMRELI
+Enter value for clsnm: BCA-3
+old   1: insert into stud values(&sid, '&snm', '&cty', '&clsnm')
+new   1: insert into stud values(101, 'BBB', 'AMRELI', 'BCA-3')
+insert into stud values(101, 'BBB', 'AMRELI', 'BCA-3')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (EMP.PKSID) violated 
+
+SQL> alter table stud disable constraint pksid;
+
+Table altered.
+
+SQL> select * from stud;
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       102 XYZ        AMARAPUR   BCA-3                                                              
+       103 AAA        AMRELI     BCA-1                                                              
+
+SQL> insert into stud values(&sid, '&snm', '&cty', '&clsnm');
+Enter value for sid: 101
+Enter value for snm: BBB
+Enter value for cty: AMRELI
+Enter value for clsnm: BCA-3
+old   1: insert into stud values(&sid, '&snm', '&cty', '&clsnm')
+new   1: insert into stud values(101, 'BBB', 'AMRELI', 'BCA-3')
+
+1 row created.
+
+SQL> select * from stud;
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       102 XYZ        AMARAPUR   BCA-3                                                              
+       103 AAA        AMRELI     BCA-1                                                              
+       101 BBB        AMRELI     BCA-3                                                              
+
+SQL> select * from stud where sid=101;
+
+       SID SNM        CTY        CLSNM                                                              
+---------- ---------- ---------- -----                                                              
+       101 ABC        AMRELI     BCA-3                                                              
+       101 BBB        AMRELI     BCA-3                                                              
+
+SQL> alter table stud enable constraint pksid;
+alter table stud enable constraint pksid
+*
+ERROR at line 1:
+ORA-02437: cannot validate (EMP.PKSID) - primary key violated 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

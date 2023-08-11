@@ -1,0 +1,301 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+CUSTOMER                       TABLE                                                                
+PRODUCT                        TABLE                                                                
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUDDATA                       TABLE                                                                
+STUD                           TABLE                                                                
+STUDMARKS                      TABLE                                                                
+SEMMARK                        TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+13 rows selected.
+
+SQL> create table orders
+  2  (
+  3  oid number(3) constraint orderid primary key,
+  4  cnm number(3) references customer(cid) on delete cascade,
+  5  pnm number(3) references product(pid) on delete cascade,
+  6  oadds varchar2(10),
+  7  qty number(3),
+  8  pprice number(6),
+  9  discount number(3),
+ 10  grandtot number(10)
+ 11  );
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table customer add gender varchar2(10) check (gender IN('MALE','FEMALE'));
+
+Table altered.
+
+SQL> desc customer;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ CID                                                   NOT NULL NUMBER(3)
+ CNM                                                   NOT NULL VARCHAR2(10)
+ CODD                                                           VARCHAR2(10)
+ CCT                                                            VARCHAR2(10)
+ CMOB                                                           NUMBER(10)
+ CEMAILID                                                       VARCHAR2(15)
+ AGE                                                            NUMBER(3)
+ GENDER                                                         VARCHAR2(10)
+
+SQL> select * from customer;
+
+no rows selected
+
+SQL> desc product;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ PID                                                   NOT NULL NUMBER(3)
+ PCODE                                                          NUMBER(4)
+ PNM                                                            VARCHAR2(10)
+ PMES                                                           VARCHAR2(10)
+ PRICE                                                          NUMBER(6)
+ PMD                                                            DATE
+ PEXP                                                           DATE
+
+SQL> select * from product;
+
+no rows selected
+
+SQL> alter table product modify price number(10,5);
+
+Table altered.
+
+SQL> desc product;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ PID                                                   NOT NULL NUMBER(3)
+ PCODE                                                          NUMBER(4)
+ PNM                                                            VARCHAR2(10)
+ PMES                                                           VARCHAR2(10)
+ PRICE                                                          NUMBER(10,5)
+ PMD                                                            DATE
+ PEXP                                                           DATE
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select e.ename, e.job, e.sal, d.dname, d.loc from emp e, dept d where e.deptno=d.deptno;
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+SMITH      CLERK            800 RESEARCH       DALLAS                                               
+ALLEN      SALESMAN        1600 SALES          CHICAGO                                              
+WARD       SALESMAN        1250 SALES          CHICAGO                                              
+JONES      MANAGER         2975 RESEARCH       DALLAS                                               
+MARTIN     SALESMAN        1250 SALES          CHICAGO                                              
+BLAKE      MANAGER         2850 SALES          CHICAGO                                              
+CLARK      MANAGER         2450 ACCOUNTING     NEW YORK                                             
+SCOTT      ANALYST         3000 RESEARCH       DALLAS                                               
+KING       PRESIDENT       5000 ACCOUNTING     NEW YORK                                             
+TURNER     SALESMAN        1500 SALES          CHICAGO                                              
+ADAMS      CLERK           1100 RESEARCH       DALLAS                                               
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+JAMES      CLERK            950 SALES          CHICAGO                                              
+FORD       ANALYST         3000 RESEARCH       DALLAS                                               
+MILLER     CLERK           1300 ACCOUNTING     NEW YORK                                             
+
+14 rows selected.
+
+SQL> select e.ename, e.job, e.sal, d.dname, d.loc from emp e, dept d where d.deptno=e.deptno(+);
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+SMITH      CLERK            800 RESEARCH       DALLAS                                               
+ALLEN      SALESMAN        1600 SALES          CHICAGO                                              
+WARD       SALESMAN        1250 SALES          CHICAGO                                              
+JONES      MANAGER         2975 RESEARCH       DALLAS                                               
+MARTIN     SALESMAN        1250 SALES          CHICAGO                                              
+BLAKE      MANAGER         2850 SALES          CHICAGO                                              
+CLARK      MANAGER         2450 ACCOUNTING     NEW YORK                                             
+SCOTT      ANALYST         3000 RESEARCH       DALLAS                                               
+KING       PRESIDENT       5000 ACCOUNTING     NEW YORK                                             
+TURNER     SALESMAN        1500 SALES          CHICAGO                                              
+ADAMS      CLERK           1100 RESEARCH       DALLAS                                               
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+JAMES      CLERK            950 SALES          CHICAGO                                              
+FORD       ANALYST         3000 RESEARCH       DALLAS                                               
+MILLER     CLERK           1300 ACCOUNTING     NEW YORK                                             
+                                OPERATIONS     BOSTON                                               
+
+15 rows selected.
+
+SQL> select e.ename, e.job, e.sal, d.dname, d.loc from emp e, dept d where d.deptno(+)=e.deptno;
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+MILLER     CLERK           1300 ACCOUNTING     NEW YORK                                             
+KING       PRESIDENT       5000 ACCOUNTING     NEW YORK                                             
+CLARK      MANAGER         2450 ACCOUNTING     NEW YORK                                             
+FORD       ANALYST         3000 RESEARCH       DALLAS                                               
+ADAMS      CLERK           1100 RESEARCH       DALLAS                                               
+SCOTT      ANALYST         3000 RESEARCH       DALLAS                                               
+JONES      MANAGER         2975 RESEARCH       DALLAS                                               
+SMITH      CLERK            800 RESEARCH       DALLAS                                               
+JAMES      CLERK            950 SALES          CHICAGO                                              
+TURNER     SALESMAN        1500 SALES          CHICAGO                                              
+BLAKE      MANAGER         2850 SALES          CHICAGO                                              
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+MARTIN     SALESMAN        1250 SALES          CHICAGO                                              
+WARD       SALESMAN        1250 SALES          CHICAGO                                              
+ALLEN      SALESMAN        1600 SALES          CHICAGO                                              
+
+14 rows selected.
+
+SQL> select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno = e.deptno(+)
+  2  UNION
+  3  select d.dname, d.loc, e.ename, e.job, e.sal from dept d, emp e where d.deptno(+) = e.deptno;
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+ACCOUNTING     NEW YORK      CLARK      MANAGER         2450                                        
+ACCOUNTING     NEW YORK      KING       PRESIDENT       5000                                        
+ACCOUNTING     NEW YORK      MILLER     CLERK           1300                                        
+OPERATIONS     BOSTON                                                                               
+RESEARCH       DALLAS        ADAMS      CLERK           1100                                        
+RESEARCH       DALLAS        FORD       ANALYST         3000                                        
+RESEARCH       DALLAS        JONES      MANAGER         2975                                        
+RESEARCH       DALLAS        SCOTT      ANALYST         3000                                        
+RESEARCH       DALLAS        SMITH      CLERK            800                                        
+SALES          CHICAGO       ALLEN      SALESMAN        1600                                        
+SALES          CHICAGO       BLAKE      MANAGER         2850                                        
+
+DNAME          LOC           ENAME      JOB              SAL                                        
+-------------- ------------- ---------- --------- ----------                                        
+SALES          CHICAGO       JAMES      CLERK            950                                        
+SALES          CHICAGO       MARTIN     SALESMAN        1250                                        
+SALES          CHICAGO       TURNER     SALESMAN        1500                                        
+SALES          CHICAGO       WARD       SALESMAN        1250                                        
+
+15 rows selected.
+
+SQL> select e.ename "EMPNAME", m.ename "MANAGER NAME" from emp e, emp m where e.mgr=m.empno;
+
+EMPNAME    MANAGER NA                                                                               
+---------- ----------                                                                               
+FORD       JONES                                                                                    
+SCOTT      JONES                                                                                    
+JAMES      BLAKE                                                                                    
+TURNER     BLAKE                                                                                    
+MARTIN     BLAKE                                                                                    
+WARD       BLAKE                                                                                    
+ALLEN      BLAKE                                                                                    
+MILLER     CLARK                                                                                    
+ADAMS      SCOTT                                                                                    
+CLARK      KING                                                                                     
+BLAKE      KING                                                                                     
+
+EMPNAME    MANAGER NA                                                                               
+---------- ----------                                                                               
+JONES      KING                                                                                     
+SMITH      FORD                                                                                     
+
+13 rows selected.
+
+SQL> select e.ename, e.job, e.sal, d.dname, d.loc from emp e, dept d where e.deptno=d.deptno;
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+SMITH      CLERK            800 RESEARCH       DALLAS                                               
+ALLEN      SALESMAN        1600 SALES          CHICAGO                                              
+WARD       SALESMAN        1250 SALES          CHICAGO                                              
+JONES      MANAGER         2975 RESEARCH       DALLAS                                               
+MARTIN     SALESMAN        1250 SALES          CHICAGO                                              
+BLAKE      MANAGER         2850 SALES          CHICAGO                                              
+CLARK      MANAGER         2450 ACCOUNTING     NEW YORK                                             
+SCOTT      ANALYST         3000 RESEARCH       DALLAS                                               
+KING       PRESIDENT       5000 ACCOUNTING     NEW YORK                                             
+TURNER     SALESMAN        1500 SALES          CHICAGO                                              
+ADAMS      CLERK           1100 RESEARCH       DALLAS                                               
+
+ENAME      JOB              SAL DNAME          LOC                                                  
+---------- --------- ---------- -------------- -------------                                        
+JAMES      CLERK            950 SALES          CHICAGO                                              
+FORD       ANALYST         3000 RESEARCH       DALLAS                                               
+MILLER     CLERK           1300 ACCOUNTING     NEW YORK                                             
+
+14 rows selected.
+
+SQL> select ename, job, sal from emp where sal = (select max(sal) from emp);
+
+ENAME      JOB              SAL                                                                     
+---------- --------- ----------                                                                     
+KING       PRESIDENT       5000                                                                     
+
+SQL> select ename, job, sal from emp where sal IN(select max(sal) from emp group by job);
+
+ENAME      JOB              SAL                                                                     
+---------- --------- ----------                                                                     
+MILLER     CLERK           1300                                                                     
+ALLEN      SALESMAN        1600                                                                     
+KING       PRESIDENT       5000                                                                     
+JONES      MANAGER         2975                                                                     
+FORD       ANALYST         3000                                                                     
+SCOTT      ANALYST         3000                                                                     
+
+6 rows selected.
+
+SQL> select ename, job, sal from emp where (sal,job) IN(select max(sal),job from emp group by job);
+
+ENAME      JOB              SAL                                                                     
+---------- --------- ----------                                                                     
+MILLER     CLERK           1300                                                                     
+ALLEN      SALESMAN        1600                                                                     
+KING       PRESIDENT       5000                                                                     
+JONES      MANAGER         2975                                                                     
+FORD       ANALYST         3000                                                                     
+SCOTT      ANALYST         3000                                                                     
+
+6 rows selected.
+
+SQL> select ename, job, sal from emp where deptno IN(select deptno from emp where ename='SCOTT');
+
+ENAME      JOB              SAL                                                                     
+---------- --------- ----------                                                                     
+FORD       ANALYST         3000                                                                     
+ADAMS      CLERK           1100                                                                     
+SCOTT      ANALYST         3000                                                                     
+JONES      MANAGER         2975                                                                     
+SMITH      CLERK            800                                                                     
+
+SQL> select deptno, ename, job, sal from emp e where sal=(select max(sal) from emp where deptno=e.deptno) order by deptno;
+
+    DEPTNO ENAME      JOB              SAL                                                          
+---------- ---------- --------- ----------                                                          
+        10 KING       PRESIDENT       5000                                                          
+        20 SCOTT      ANALYST         3000                                                          
+        20 FORD       ANALYST         3000                                                          
+        30 BLAKE      MANAGER         2850                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

@@ -1,0 +1,43 @@
+SQL> select sum(sal) "Total Monthly Salary" from emp;
+
+Total Monthly Salary                                                                                
+--------------------                                                                                
+               29025                                                                                
+
+SQL> select min(sal) "Minimum Salary" from emp;
+
+Minimum Salary                                                                                      
+--------------                                                                                      
+           800                                                                                      
+
+SQL> select max(sal) "Maximum Salary" from emp;
+
+Maximum Salary                                                                                      
+--------------                                                                                      
+          5000                                                                                      
+
+SQL> select avg(sal) "Averge Salary" from emp;
+
+Averge Salary                                                                                       
+-------------                                                                                       
+   2073.21429                                                                                       
+
+SQL> select count(sal) "Count members" from emp;
+
+Count members                                                                                       
+-------------                                                                                       
+           14                                                                                       
+
+SQL> select count(*) "Count members" from emp;
+
+Count members                                                                                       
+-------------                                                                                       
+           14                                                                                       
+
+SQL> select count(comm) "Count members" from emp;
+
+Count members                                                                                       
+-------------                                                                                       
+            4                                                                                       
+
+SQL> spool off;

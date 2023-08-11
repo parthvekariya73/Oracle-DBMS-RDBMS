@@ -1,0 +1,288 @@
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+EMP                            TABLE                                            
+DEPT                           TABLE                                            
+BONUS                          TABLE                                            
+SALGRADE                       TABLE                                            
+DUMMY                          TABLE                                            
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> set linesize 100;
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> desc dept;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ DEPTNO                                                         NUMBER(2)
+ DNAME                                                          VARCHAR2(14)
+ LOC                                                            VARCHAR2(13)
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+        20 RESEARCH       DALLAS                                                                    
+        30 SALES          CHICAGO                                                                   
+        40 OPERATIONS     BOSTON                                                                    
+
+SQL> desc salgrade;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ GRADE                                                          NUMBER
+ LOSAL                                                          NUMBER
+ HISAL                                                          NUMBER
+
+SQL> select * from salgrade;
+
+     GRADE      LOSAL      HISAL                                                                    
+---------- ---------- ----------                                                                    
+         1        700       1200                                                                    
+         2       1201       1400                                                                    
+         3       1401       2000                                                                    
+         4       2001       3000                                                                    
+         5       3001       9999                                                                    
+
+SQL> desc bonus;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ ENAME                                                          VARCHAR2(10)
+ JOB                                                            VARCHAR2(9)
+ SAL                                                            NUMBER
+ COMM                                                           NUMBER
+
+SQL> select * from bonus;
+
+no rows selected
+
+SQL> desc dummy;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ DUMMY                                                          NUMBER
+
+SQL> select * from dummy;
+
+     DUMMY                                                                                          
+----------                                                                                          
+         0                                                                                          
+
+SQL> select * from emp where deptno=10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> select * from emp where job='CLERK';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+SQL> select * from emp where sal<1250;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+
+SQL> select DISTINCT job from emp;
+
+JOB                                                                                                 
+---------                                                                                           
+CLERK                                                                                               
+SALESMAN                                                                                            
+PRESIDENT                                                                                           
+MANAGER                                                                                             
+ANALYST                                                                                             
+
+SQL> select * from emp ORDER BY ename desc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+14 rows selected.
+
+SQL> select ename, sal from emp ORDER BY ename asc;
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+ADAMS            1100                                                                               
+ALLEN            1600                                                                               
+BLAKE            2850                                                                               
+CLARK            2450                                                                               
+FORD             3000                                                                               
+JAMES             950                                                                               
+JONES            2975                                                                               
+KING             5000                                                                               
+MARTIN           1250                                                                               
+MILLER           1300                                                                               
+SCOTT            3000                                                                               
+
+ENAME             SAL                                                                               
+---------- ----------                                                                               
+SMITH             800                                                                               
+TURNER           1500                                                                               
+WARD             1250                                                                               
+
+14 rows selected.
+
+SQL> select job, ename from emp ORDER BY job desc, ename asc;
+
+JOB       ENAME                                                                                     
+--------- ----------                                                                                
+SALESMAN  ALLEN                                                                                     
+SALESMAN  MARTIN                                                                                    
+SALESMAN  TURNER                                                                                    
+SALESMAN  WARD                                                                                      
+PRESIDENT KING                                                                                      
+MANAGER   BLAKE                                                                                     
+MANAGER   CLARK                                                                                     
+MANAGER   JONES                                                                                     
+CLERK     ADAMS                                                                                     
+CLERK     JAMES                                                                                     
+CLERK     MILLER                                                                                    
+
+JOB       ENAME                                                                                     
+--------- ----------                                                                                
+CLERK     SMITH                                                                                     
+ANALYST   FORD                                                                                      
+ANALYST   SCOTT                                                                                     
+
+14 rows selected.
+
+SQL> select sum(sal) from emp;
+
+  SUM(SAL)                                                                                          
+----------                                                                                          
+     29025                                                                                          
+
+SQL> select avg(sal) from emp;
+
+  AVG(SAL)                                                                                          
+----------                                                                                          
+2073.21429                                                                                          
+
+SQL> select min(sal) from emp;
+
+  MIN(SAL)                                                                                          
+----------                                                                                          
+       800                                                                                          
+
+SQL> select max(sal) from emp;
+
+  MAX(SAL)                                                                                          
+----------                                                                                          
+      5000                                                                                          
+
+SQL> select count(sal) from emp;
+
+COUNT(SAL)                                                                                          
+----------                                                                                          
+        14                                                                                          
+
+SQL> select variance(sal) "Sal Variance" from emp;
+
+Sal Variance                                                                                        
+------------                                                                                        
+  1398313.87                                                                                        
+
+SQL> select stddev(sal) "Sal stdDev" from emp;
+
+Sal stdDev                                                                                          
+----------                                                                                          
+1182.50322                                                                                          
+
+SQL> select deptno, max(sal) from emp GROUP BY deptno;
+
+    DEPTNO   MAX(SAL)                                                                               
+---------- ----------                                                                               
+        30       2850                                                                               
+        20       3000                                                                               
+        10       5000                                                                               
+
+SQL> select job, max(sal) from emp GROUP BY job;
+
+JOB         MAX(SAL)                                                                                
+--------- ----------                                                                                
+CLERK           1300                                                                                
+SALESMAN        1600                                                                                
+PRESIDENT       5000                                                                                
+MANAGER         2975                                                                                
+ANALYST         3000                                                                                
+
+SQL> select deptno, avg(sal) from emp GROUP BY deptno HAVING avg(sal)<=1800;
+
+    DEPTNO   AVG(SAL)                                                                               
+---------- ----------                                                                               
+        30 1566.66667                                                                               
+
+SQL> select job, avg(sal) from emp GROUP BY job HAVING avg(sal) <= (select avg(sal) from emp where job='SALESMAN' );
+
+JOB         AVG(SAL)                                                                                
+--------- ----------                                                                                
+CLERK         1037.5                                                                                
+SALESMAN        1400                                                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

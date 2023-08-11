@@ -1,0 +1,108 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+RESULT                         TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+6 rows selected.
+
+SQL> select * from result;
+
+no rows selected
+
+// 1
+SQL> insert into result values(101,'ABC','BCA-3',77,83,63,43,NULL,NULL);
+
+1 row created.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       101 ABC        BCA-3          77         83         63         43                            
+
+// 2
+SQL> insert into result (rid,snm,clsnm,oracle,cpp,wp,net) values(102,'XYZ','BCA-3',62,93,76,68);
+
+1 row created.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       101 ABC        BCA-3          77         83         63         43                            
+       102 XYZ        BCA-3          62         93         76         68                            
+
+// 3
+SQL> insert into result values(&rid,'&snm','&clsnm',&oracle,&cpp,&wp,&net,&tot,&per);
+Enter value for rid: 103
+Enter value for snm: PQRS
+Enter value for clsnm: BCA-3
+Enter value for oracle: 82
+Enter value for cpp: 73
+Enter value for wp: 73
+Enter value for net: 62
+Enter value for tot: NULL
+Enter value for per: NULL
+old   1: insert into result values(&rid,'&snm','&clsnm',&oracle,&cpp,&wp,&net,&tot,&per)
+new   1: insert into result values(103,'PQRS','BCA-3',82,73,73,62,NULL,NULL)
+
+1 row created.
+
+SQL> /
+Enter value for rid: 104
+Enter value for snm: MNS
+Enter value for clsnm: BCA-3
+Enter value for oracle: 72
+Enter value for cpp: 873
+Enter value for wp: 62
+Enter value for net: 63
+Enter value for tot: NULL
+Enter value for per: NULL
+old   1: insert into result values(&rid,'&snm','&clsnm',&oracle,&cpp,&wp,&net,&tot,&per)
+new   1: insert into result values(104,'MNS','BCA-3',72,873,62,63,NULL,NULL)
+
+1 row created.
+
+SQL> run
+  1* insert into result values(&rid,'&snm','&clsnm',&oracle,&cpp,&wp,&net,&tot,&per)
+Enter value for rid: 105
+Enter value for snm: FGH
+Enter value for clsnm: BCA-3
+Enter value for oracle: 62
+Enter value for cpp: 83
+Enter value for wp: 52
+Enter value for net: 92
+Enter value for tot: NULL
+Enter value for per: NULL
+old   1: insert into result values(&rid,'&snm','&clsnm',&oracle,&cpp,&wp,&net,&tot,&per)
+new   1: insert into result values(105,'FGH','BCA-3',62,83,52,92,NULL,NULL)
+
+1 row created.
+
+SQL> select * from result;
+
+       RID SNM        CLSNM      ORACLE        CPP         WP        NET        TOT        PER      
+---------- ---------- ------ ---------- ---------- ---------- ---------- ---------- ----------      
+       101 ABC        BCA-3          77         83         63         43                            
+       102 XYZ        BCA-3          62         93         76         68                            
+       103 PQRS       BCA-3          82         73         73         62                            
+       104 MNS        BCA-3          72        873         62         63                            
+       105 FGH        BCA-3          62         83         52         92                            
+
+// 4
+SQL> insert into <tblnm>(curr table) select <col1>,<col2>... from <tblnm>(exsting table) <where condition>;
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

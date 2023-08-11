@@ -1,0 +1,55 @@
+SQL> select ABS(-5) "ABSOLUTE" from dual;
+
+  ABSOLUTE                                                                                          
+----------                                                                                          
+         5                                                                                          
+
+SQL> select POWER(5,2) "power" from dual;
+
+     power                                                                                          
+----------                                                                                          
+        25                                                                                          
+
+SQL> select POWER(3,2) "power" from dual;
+
+     power                                                                                          
+----------                                                                                          
+         9                                                                                          
+
+SQL> select ROUND(15.18, 1) "Round" from dual;
+
+     Round                                                                                          
+----------                                                                                          
+      15.2                                                                                          
+
+SQL> select SQRT(25) "Square Root" from dual;
+
+Square Root                                                                                         
+-----------                                                                                         
+          5                                                                                         
+
+SQL> select MOD(15,7) "Mod" from dual;
+
+       Mod                                                                                          
+----------                                                                                          
+         1                                                                                          
+
+SQL> select MOD(14,2) "Mod" from dual;
+
+       Mod                                                                                          
+----------                                                                                          
+         0                                                                                          
+
+SQL> select FLOOR(24.7) "Floor" from dual;
+
+     Floor                                                                                          
+----------                                                                                          
+        24                                                                                          
+
+SQL> select CEIL(24.7) "Ceil" from dual;
+
+      Ceil                                                                                          
+----------                                                                                          
+        25                                                                                          
+
+SQL> spool off;

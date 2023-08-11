@@ -1,0 +1,327 @@
+SQL> conn emp/emp;
+Connected.
+SQL> set linesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+STAFF                          TABLE                                                                
+RESULT                         TABLE                                                                
+STUDDATA                       TABLE                                                                
+STUD                           TABLE                                                                
+STUDMARKS                      TABLE                                                                
+SEMMARK                        TABLE                                                                
+EMP                            TABLE                                                                
+DEPT                           TABLE                                                                
+BONUS                          TABLE                                                                
+SALGRADE                       TABLE                                                                
+DUMMY                          TABLE                                                                
+
+11 rows selected.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select e.ename "EmpName", m.ename "ManagerName" from emp e, emp m;
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+SMITH      SMITH                                                                                    
+SMITH      ALLEN                                                                                    
+SMITH      WARD                                                                                     
+SMITH      JONES                                                                                    
+SMITH      MARTIN                                                                                   
+SMITH      BLAKE                                                                                    
+SMITH      CLARK                                                                                    
+SMITH      SCOTT                                                                                    
+SMITH      KING                                                                                     
+SMITH      TURNER                                                                                   
+SMITH      ADAMS                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+SMITH      JAMES                                                                                    
+SMITH      FORD                                                                                     
+SMITH      MILLER                                                                                   
+ALLEN      SMITH                                                                                    
+ALLEN      ALLEN                                                                                    
+ALLEN      WARD                                                                                     
+ALLEN      JONES                                                                                    
+ALLEN      MARTIN                                                                                   
+ALLEN      BLAKE                                                                                    
+ALLEN      CLARK                                                                                    
+ALLEN      SCOTT                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+ALLEN      KING                                                                                     
+ALLEN      TURNER                                                                                   
+ALLEN      ADAMS                                                                                    
+ALLEN      JAMES                                                                                    
+ALLEN      FORD                                                                                     
+ALLEN      MILLER                                                                                   
+WARD       SMITH                                                                                    
+WARD       ALLEN                                                                                    
+WARD       WARD                                                                                     
+WARD       JONES                                                                                    
+WARD       MARTIN                                                                                   
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+WARD       BLAKE                                                                                    
+WARD       CLARK                                                                                    
+WARD       SCOTT                                                                                    
+WARD       KING                                                                                     
+WARD       TURNER                                                                                   
+WARD       ADAMS                                                                                    
+WARD       JAMES                                                                                    
+WARD       FORD                                                                                     
+WARD       MILLER                                                                                   
+JONES      SMITH                                                                                    
+JONES      ALLEN                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+JONES      WARD                                                                                     
+JONES      JONES                                                                                    
+JONES      MARTIN                                                                                   
+JONES      BLAKE                                                                                    
+JONES      CLARK                                                                                    
+JONES      SCOTT                                                                                    
+JONES      KING                                                                                     
+JONES      TURNER                                                                                   
+JONES      ADAMS                                                                                    
+JONES      JAMES                                                                                    
+JONES      FORD                                                                                     
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+JONES      MILLER                                                                                   
+MARTIN     SMITH                                                                                    
+MARTIN     ALLEN                                                                                    
+MARTIN     WARD                                                                                     
+MARTIN     JONES                                                                                    
+MARTIN     MARTIN                                                                                   
+MARTIN     BLAKE                                                                                    
+MARTIN     CLARK                                                                                    
+MARTIN     SCOTT                                                                                    
+MARTIN     KING                                                                                     
+MARTIN     TURNER                                                                                   
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+MARTIN     ADAMS                                                                                    
+MARTIN     JAMES                                                                                    
+MARTIN     FORD                                                                                     
+MARTIN     MILLER                                                                                   
+BLAKE      SMITH                                                                                    
+BLAKE      ALLEN                                                                                    
+BLAKE      WARD                                                                                     
+BLAKE      JONES                                                                                    
+BLAKE      MARTIN                                                                                   
+BLAKE      BLAKE                                                                                    
+BLAKE      CLARK                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+BLAKE      SCOTT                                                                                    
+BLAKE      KING                                                                                     
+BLAKE      TURNER                                                                                   
+BLAKE      ADAMS                                                                                    
+BLAKE      JAMES                                                                                    
+BLAKE      FORD                                                                                     
+BLAKE      MILLER                                                                                   
+CLARK      SMITH                                                                                    
+CLARK      ALLEN                                                                                    
+CLARK      WARD                                                                                     
+CLARK      JONES                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+CLARK      MARTIN                                                                                   
+CLARK      BLAKE                                                                                    
+CLARK      CLARK                                                                                    
+CLARK      SCOTT                                                                                    
+CLARK      KING                                                                                     
+CLARK      TURNER                                                                                   
+CLARK      ADAMS                                                                                    
+CLARK      JAMES                                                                                    
+CLARK      FORD                                                                                     
+CLARK      MILLER                                                                                   
+SCOTT      SMITH                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+SCOTT      ALLEN                                                                                    
+SCOTT      WARD                                                                                     
+SCOTT      JONES                                                                                    
+SCOTT      MARTIN                                                                                   
+SCOTT      BLAKE                                                                                    
+SCOTT      CLARK                                                                                    
+SCOTT      SCOTT                                                                                    
+SCOTT      KING                                                                                     
+SCOTT      TURNER                                                                                   
+SCOTT      ADAMS                                                                                    
+SCOTT      JAMES                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+SCOTT      FORD                                                                                     
+SCOTT      MILLER                                                                                   
+KING       SMITH                                                                                    
+KING       ALLEN                                                                                    
+KING       WARD                                                                                     
+KING       JONES                                                                                    
+KING       MARTIN                                                                                   
+KING       BLAKE                                                                                    
+KING       CLARK                                                                                    
+KING       SCOTT                                                                                    
+KING       KING                                                                                     
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+KING       TURNER                                                                                   
+KING       ADAMS                                                                                    
+KING       JAMES                                                                                    
+KING       FORD                                                                                     
+KING       MILLER                                                                                   
+TURNER     SMITH                                                                                    
+TURNER     ALLEN                                                                                    
+TURNER     WARD                                                                                     
+TURNER     JONES                                                                                    
+TURNER     MARTIN                                                                                   
+TURNER     BLAKE                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+TURNER     CLARK                                                                                    
+TURNER     SCOTT                                                                                    
+TURNER     KING                                                                                     
+TURNER     TURNER                                                                                   
+TURNER     ADAMS                                                                                    
+TURNER     JAMES                                                                                    
+TURNER     FORD                                                                                     
+TURNER     MILLER                                                                                   
+ADAMS      SMITH                                                                                    
+ADAMS      ALLEN                                                                                    
+ADAMS      WARD                                                                                     
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+ADAMS      JONES                                                                                    
+ADAMS      MARTIN                                                                                   
+ADAMS      BLAKE                                                                                    
+ADAMS      CLARK                                                                                    
+ADAMS      SCOTT                                                                                    
+ADAMS      KING                                                                                     
+ADAMS      TURNER                                                                                   
+ADAMS      ADAMS                                                                                    
+ADAMS      JAMES                                                                                    
+ADAMS      FORD                                                                                     
+ADAMS      MILLER                                                                                   
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+JAMES      SMITH                                                                                    
+JAMES      ALLEN                                                                                    
+JAMES      WARD                                                                                     
+JAMES      JONES                                                                                    
+JAMES      MARTIN                                                                                   
+JAMES      BLAKE                                                                                    
+JAMES      CLARK                                                                                    
+JAMES      SCOTT                                                                                    
+JAMES      KING                                                                                     
+JAMES      TURNER                                                                                   
+JAMES      ADAMS                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+JAMES      JAMES                                                                                    
+JAMES      FORD                                                                                     
+JAMES      MILLER                                                                                   
+FORD       SMITH                                                                                    
+FORD       ALLEN                                                                                    
+FORD       WARD                                                                                     
+FORD       JONES                                                                                    
+FORD       MARTIN                                                                                   
+FORD       BLAKE                                                                                    
+FORD       CLARK                                                                                    
+FORD       SCOTT                                                                                    
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+FORD       KING                                                                                     
+FORD       TURNER                                                                                   
+FORD       ADAMS                                                                                    
+FORD       JAMES                                                                                    
+FORD       FORD                                                                                     
+FORD       MILLER                                                                                   
+MILLER     SMITH                                                                                    
+MILLER     ALLEN                                                                                    
+MILLER     WARD                                                                                     
+MILLER     JONES                                                                                    
+MILLER     MARTIN                                                                                   
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+MILLER     BLAKE                                                                                    
+MILLER     CLARK                                                                                    
+MILLER     SCOTT                                                                                    
+MILLER     KING                                                                                     
+MILLER     TURNER                                                                                   
+MILLER     ADAMS                                                                                    
+MILLER     JAMES                                                                                    
+MILLER     FORD                                                                                     
+MILLER     MILLER                                                                                   
+
+196 rows selected.
+
+SQL> select e.ename "EmpName", m.ename "ManagerName" from emp e, emp m where e.mgr = m.empno;
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+FORD       JONES                                                                                    
+SCOTT      JONES                                                                                    
+JAMES      BLAKE                                                                                    
+TURNER     BLAKE                                                                                    
+MARTIN     BLAKE                                                                                    
+WARD       BLAKE                                                                                    
+ALLEN      BLAKE                                                                                    
+MILLER     CLARK                                                                                    
+ADAMS      SCOTT                                                                                    
+CLARK      KING                                                                                     
+BLAKE      KING                                                                                     
+
+EmpName    ManagerNam                                                                               
+---------- ----------                                                                               
+JONES      KING                                                                                     
+SMITH      FORD                                                                                     
+
+13 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
